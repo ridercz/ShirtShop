@@ -7,9 +7,9 @@ namespace Altairis.ShirtShop.Data {
     public class Order {
 
         [Key]
-        public int OrderId { get; set; }
+        public int Id { get; set; }
 
-        public DateTime DateCreated { get; set; }
+        public DateTime DateCreated { get; set; } = DateTime.Now;
 
         public DateTime? DatePaid { get; set; }
 
