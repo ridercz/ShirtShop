@@ -9,17 +9,17 @@ using Altairis.ShirtShop.Data;
 namespace Altairis.ShirtShop.Web.Pages {
     public class IndexModel : PageModel {
 
-        private readonly ShirtDbContext _context;
+        private readonly ShirtDbContext context;
 
         public IndexModel(ShirtDbContext dc) {
-            this._context = dc;
+            this.context = dc;
         }
 
-        public IEnumerable<ShirtSize> ShirtSizes { get; set; }
+        public IEnumerable<ShirtSize> ShirtSizes => this.context.ShirtSizes.OrderBy(x => x.SortPriority);
 
         public void OnGet() {
-            this.ShirtSizes = this._context.ShirtSizes;
 
         }
+
     }
 }
