@@ -1,0 +1,9 @@
+{
+  "DbFileName": "ShirtShop.db",
+  "OrderEmailAddress": "orders@example.com",
+  "Mailing": {
+    "SenderName": "T-Shirt Shop",
+    "SenderEmail": "shirtshop@example.com",
+    "PickupFolder": "C:\\InetPub\\MailRoot\\pickup"
+  }
+}
