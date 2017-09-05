@@ -1,9 +1,50 @@
 ﻿@page
 @model IndexModel
 @{
-    <ul>
-        @foreach (var item in this.Model.ShirtSizes) {
-            <li>@item.Name</li>
-        }
-    </ul>
+    <h1>Objednávka trička</h1>
+    <form method="post" asp-page="Index.cshtml">
+        <fieldset>
+            <legend>Tričko</legend>
+            <p>
+                <label asp-for="@Model.Order.ShirtModelId">Motiv:</label><br />
+                <select asp-for="@Model.Order.ShirtModelId" asp-items="@Model.ShirtModels"></select>
+            </p>
+            <p>
+                <label asp-for="@Model.Order.ShirtSizeId">Velikost:</label><br />
+                <select asp-for="@Model.Order.ShirtSizeId" asp-items="@Model.ShirtSizes"></select>
+            </p>
+        </fieldset>
+        <fieldset>
+            <legend>Zákazník</legend>
+            <p>
+                <label asp-for="@Model.Order.Name">Jméno:</label><br />
+                <input asp-for="@Model.Order.Name" type="text" />
+            </p>
+            <p>
+                <label asp-for="@Model.Order.Email">E-mail:</label><br />
+                <input asp-for="@Model.Order.Email" type="text" />
+            </p>
+            <p>
+                <label asp-for="@Model.Order.PhoneNumber">Telefon:</label><br />
+                <input asp-for="@Model.Order.PhoneNumber" type="text" />
+            </p>
+        </fieldset>
+        <fieldset>
+            <legend>Dodání</legend>
+            <p>
+                <label asp-for="@Model.Order.DeliveryMethodId">Způsob doručení:</label><br />
+                <select asp-for="@Model.Order.DeliveryMethodId" asp-items="@Model.DeliveryMethods"></select>
+            </p>
+            <p>
+                <label asp-for="@Model.Order.DeliveryMethodId">Doručovací adresa:</label><br />
+                <textarea asp-for="@Model.Order.DeliveryAddress"></textarea>
+            </p>
+        </fieldset>
+        <fieldset>
+            <legend>Poznámky</legend>
+            <textarea asp-for="@Model.Order.BuyerNotes"></textarea>
+        </fieldset>
+        <div asp-validation-summary="All"></div>
+        <input type="submit" value="Odeslat" />
+    </form>
 }
