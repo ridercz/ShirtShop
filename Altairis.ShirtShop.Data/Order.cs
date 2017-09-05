@@ -31,6 +31,9 @@ namespace Altairis.ShirtShop.Data {
         [Required, MaxLength(100), EmailAddress]
         public string Email { get; set; }
 
+        [Required, MaxLength(9), Phone, RegularExpression("^[0-9]{9}")]
+        public string PhoneNumber { get; set; }
+
         [Required]
         public DeliveryMethod DeliveryMethod { get; set; }
 

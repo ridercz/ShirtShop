@@ -11,9 +11,10 @@ using System;
 namespace Altairis.ShirtShop.Data.Migrations
 {
     [DbContext(typeof(ShirtDbContext))]
-    partial class ShirtDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170905231421_Add_PhoneNumber")]
+    partial class Add_PhoneNumber
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
