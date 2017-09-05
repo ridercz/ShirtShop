@@ -40,8 +40,7 @@ namespace Altairis.ShirtShop.Web {
             app.UseMvc();
 
             // Setup database
-            dc.Database.Migrate();
-            dc.Seed();
+            if (dc.Database.EnsureCreated()) dc.Seed();
         }
 
     }

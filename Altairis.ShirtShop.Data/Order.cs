@@ -15,13 +15,11 @@ namespace Altairis.ShirtShop.Data {
 
         public DateTime? DateShipped { get; set; }
 
-        [Required]
-        public ShirtModel Model { get; set; }
+        public ShirtModel ShirtModel { get; set; }
 
         public int ShirtModelId { get; set; }
 
-        [Required]
-        public ShirtSize Size { get; set; }
+        public ShirtSize ShirtSize { get; set; }
 
         public int ShirtSizeId { get; set; }
 
@@ -34,7 +32,6 @@ namespace Altairis.ShirtShop.Data {
         [Required, MaxLength(9), Phone, RegularExpression("^[0-9]{9}")]
         public string PhoneNumber { get; set; }
 
-        [Required]
         public DeliveryMethod DeliveryMethod { get; set; }
 
         public int DeliveryMethodId { get; set; }
