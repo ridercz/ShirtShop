@@ -14,5 +14,7 @@ namespace Altairis.ShirtShop.Data {
         [Required, Range(0, 1000)]
         public int Price { get; set; }
 
+        public int SortPriority { get; set; }
+
     }
 }
