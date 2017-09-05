@@ -11,12 +11,6 @@ namespace Altairis.ShirtShop.Data {
 
         public ShirtDbContext(DbContextOptions options) : base(options) { }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            base.OnConfiguring(optionsBuilder);
-
-            optionsBuilder.UseSqlite(connectionString: "Data Source=orders.db");
-        }
-
         // Tables
 
         public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
