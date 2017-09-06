@@ -27,7 +27,7 @@ namespace Altairis.ShirtShop.Web {
             services.AddMvc();
             services.Configure<ShopOptions>(this.Configuration);
             services.AddDbContext<ShirtDbContext>(options => options.UseSqlite($"Data Source = {this.Configuration["DbFileName"]}"));
-            services.AddSingleton<IMailerService>(new Altairis.Services.Mailing.Rfc2822.PickupFolderMailService(this.Configuration["Mailing:PickupFolder"]));
+            services.AddPickupFolderMailerService(this.Configuration["Mailing:PickupFolder"]);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ShirtDbContext dc) {
