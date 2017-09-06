@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Altairis.Services.Mailing.rfc2822" Version="1.0.0-beta1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="microsoft.entityframeworkcore.sqlite" Version="2.0.0" />
   </ItemGroup>

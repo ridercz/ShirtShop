@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Altairis.ShirtShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Altairis.Services.Mailing;
 
 namespace Altairis.ShirtShop.Web {
     public class Startup {
@@ -26,6 +27,7 @@ namespace Altairis.ShirtShop.Web {
             services.AddMvc();
             services.Configure<ShopOptions>(this.Configuration);
             services.AddDbContext<ShirtDbContext>(options => options.UseSqlite($"Data Source = {this.Configuration["DbFileName"]}"));
+            services.AddSingleton<IMailerService>(new Altairis.Services.Mailing.Rfc2822.PickupFolderMailService(this.Configuration["Mailing:PickupFolder"]));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ShirtDbContext dc) {
