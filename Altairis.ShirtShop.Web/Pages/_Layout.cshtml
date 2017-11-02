@@ -2,12 +2,23 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="~/Content/styles.min.css" asp-append-version="true" />
+    <title>ShirtShop</title>
+    <link rel="stylesheet" type="text/css" href="~/Styles/site.css" asp-append-version="true" />
 </head>
 <body>
-    <div>
-        @RenderBody()
-    </div>
+    <header>
+        <h1>Demo Application</h1>
+    </header>
+    <vc:menu></vc:menu>
+    <main>
+        <div>
+            @RenderBody()
+        </div>
+        @*@await Component.InvokeAsync("OrderCounter", new { days = 3 })*@
+        @*<vc:order-counter days="3"></vc:order-counter>*@
+    </main>
+    <footer>
+        Copyright &copy; @DateTime.Today.Year - built using ASP.NET Core
+    </footer>
 </body>
 </html>

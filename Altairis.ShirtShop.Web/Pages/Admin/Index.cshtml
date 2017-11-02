@@ -1,0 +1,41 @@
+﻿@page
+@model IndexModel
+<h2>Přehled objednávek</h2>
+@if (this.Model.Orders.Any()) {
+    <table class="grid">
+        <thead>
+            <tr>
+                <th rowspan="2">ID</th>
+                <th rowspan="2">Objednávka</th>
+                <th rowspan="2">Jméno</th>
+                <th rowspan="2">E-mail</th>
+                <th colspan="3">Datum</th>
+            </tr>
+            <tr>
+                <th>objednávky</th>
+                <th>platby</th>
+                <th>odeslání</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in this.Model.Orders) {
+                <tr>
+                    <td>@item.Id.ToString().PadLeft(4, '0')</td>
+                    <td>@item.ShirtType.Name (@item.ShirtSize.Name)</td>
+                    <td>@item.FullName</td>
+                    <td><a href="mailto:@item.EmailAddress">@item.EmailAddress</a></td>
+                    <td><time value="@item.DateCreated"></time></td>
+                    <td><time value="@item.DatePaid"></time></td>
+                    <td><time value="@item.DateSent"></time></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else {
+    <p>V databázi nejsou žádné objednávky.</p>
+}
+@*<p>
+    [<a asp-page="/Account/Logout">Odhlášení</a>]
+    [<a asp-page="/Account/Manage/ChangePassword">Změna hesla</a>]
+</p>*@

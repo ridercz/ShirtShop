@@ -4,13 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Altairis.ShirtShop.Data
-{
-    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ShirtDbContext> {
-        public ShirtDbContext CreateDbContext(string[] args) {
-            var builder = new DbContextOptionsBuilder<ShirtDbContext>();
-            builder.UseSqlite(connectionString: "Data Source = shirtshop.db");
-            return new ShirtDbContext(builder.Options);
-        }
+namespace Altairis.ShirtShop.Data {
+public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ShopDbContext> {
+    public ShopDbContext CreateDbContext(string[] args) {
+        var builder = new DbContextOptionsBuilder<ShopDbContext>();
+        builder.UseSqlServer("SERVER=.\\SqlExpress;TRUSTED_CONNECTION=yes;DATABASE=ShirtShop_design");
+        return new ShopDbContext(builder.Options);
     }
+}
 }

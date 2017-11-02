@@ -1,0 +1,34 @@
+﻿@page
+@model LoginOtpModel
+<h2>Dvoufaktorová autentizace</h2>
+<p>
+    Zadejte autentizační kód z mobilní aplikace.
+    Pokud aplikaci nemáte k dispozici, můžete se
+    <a asp-page="LoginRecovery">přihlásit záchranným recovery kódem.</a>
+</p>
+<form method="post">
+    <table class="form">
+        <tbody>
+            <tr>
+                <th>Autentizační kód:</th>
+                <td><input asp-for="Input.OtpCode" /></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <input asp-for="Input.RememberDevice" />
+                    <label asp-for="Input.RememberDevice">pamatuj si toto zařízení</label>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <td>
+                    <div asp-validation-summary="All"></div>
+                    <input type="submit" value="Odeslat" />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</form>

@@ -1,0 +1,37 @@
+﻿@page
+@model LoginModel
+<h2>Přihlášení</h2>
+<form method="post">
+    <table class="form">
+        <tbody>
+            <tr>
+                <th>Uživatelské jméno:</th>
+                <td><input asp-for="Input.UserName" /></td>
+            </tr>
+            <tr>
+                <th>Heslo:</th>
+                <td><input asp-for="Input.Password" /></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <input asp-for="Input.RememberMe" />
+                    <label asp-for="Input.RememberMe">pamatuj si mě na tomto počítači</label>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <td>
+                    <div asp-validation-summary="All"></div>
+                    <input type="submit" value="Odeslat" />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</form>
+@*<p>
+    [<a asp-page="ForgotPassword">Reset zapomenutého hesla</a>]
+    [<a asp-page="Register">Registrace nového uživatele</a>]
+</p>*@

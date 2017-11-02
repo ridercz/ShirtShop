@@ -1,0 +1,38 @@
+﻿@page
+@model RegisterModel
+<h2>Registrace nového uživatele</h2>
+<form method="post">
+    <table class="form">
+        <tbody>
+            <tr>
+                <th>Jméno a příjmení:</th>
+                <td><input asp-for="Input.FullName" /></td>
+            </tr>
+            <tr>
+                <th>Uživatelské jméno:</th>
+                <td><input asp-for="Input.UserName" /></td>
+            </tr>
+            <tr>
+                <th>E-mail:</th>
+                <td><input asp-for="Input.Email" /></td>
+            </tr>
+            <tr>
+                <th>Heslo:</th>
+                <td><input asp-for="Input.Password" /></td>
+            </tr>
+            <tr>
+                <th>Heslo znovu:</th>
+                <td><input asp-for="Input.ConfirmPassword" /></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <td>
+                    <div asp-validation-summary="All"></div>
+                    <input type="submit" value="Odeslat" />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</form>

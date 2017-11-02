@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Altairis.ShirtShop.Data {
     public class Order {
-
         [Key]
         public int Id { get; set; }
 
@@ -13,37 +12,30 @@ namespace Altairis.ShirtShop.Data {
 
         public DateTime? DatePaid { get; set; }
 
-        public DateTime? DateShipped { get; set; }
-
-        public ShirtModel ShirtModel { get; set; }
-
-        public int ShirtModelId { get; set; }
+        public DateTime? DateSent { get; set; }
 
         public ShirtSize ShirtSize { get; set; }
 
         public int ShirtSizeId { get; set; }
 
-        [Required, MaxLength(100)]
-        public string Name { get; set; }
+        public ShirtType ShirtType { get; set; }
 
-        [Required, MaxLength(100), EmailAddress]
-        public string Email { get; set; }
+        public int ShirtTypeId { get; set; }
 
-        [Required, MaxLength(9), Phone, RegularExpression("^[0-9]{9}")]
-        public string PhoneNumber { get; set; }
+        [Required, MaxLength(50), DataType(DataType.EmailAddress)]
+        public string EmailAddress { get; set; }
 
-        public DeliveryMethod DeliveryMethod { get; set; }
+        [Required, MaxLength(50)]
+        public string FullName { get; set; }
 
-        public int DeliveryMethodId { get; set; }
+        [Required, MaxLength(50)]
+        public string Street { get; set; }
 
-        [MaxLength(200)]
-        public string DeliveryAddress { get; set; }
+        [Required, MaxLength(50)]
+        public string City { get; set; }
 
-        [MaxLength(1000)]
-        public string BuyerNotes { get; set; }
-
-        [MaxLength(1000)]
-        public string SellerNotes { get; set; }
+        [Required, MaxLength(5), DataType(DataType.PostalCode)]
+        public string ZipCode { get; set; }
 
     }
 }

@@ -9,13 +9,14 @@ namespace Altairis.ShirtShop.Data {
         [Key]
         public int Id { get; set; }
 
+        [Required]
+        public int SortPriority { get; set; }
+
         [Required, MaxLength(50)]
         public string Name { get; set; }
 
-        [Required, Range(0, 1000)]
+        [Required]
         public int Price { get; set; }
-
-        public int SortPriority { get; set; }
 
     }
 }

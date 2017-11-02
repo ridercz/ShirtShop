@@ -1,0 +1,26 @@
+﻿@page
+@model ChangeEmailModel
+<h2>Změna e-mailové adresy</h2>
+<form method="post">
+    <table class="form">
+        <tbody>
+            <tr>
+                <th>Vaše heslo:</th>
+                <td><input asp-for="Input.Password" /></td>
+            </tr>
+            <tr>
+                <th>Nová adresa:</th>
+                <td><input asp-for="Input.NewEmail" /></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <td>
+                    <div asp-validation-summary="All"></div>
+                    <input type="submit" value="Odeslat" />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</form>

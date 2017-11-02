@@ -1,50 +1,51 @@
 ﻿@page
 @model IndexModel
-@{
-    <h1>Objednávka trička</h1>
-    <form method="post" asp-page="Index.cshtml">
-        <fieldset>
-            <legend>Tričko</legend>
-            <p>
-                <label asp-for="@Model.Order.ShirtModelId">Motiv:</label><br />
-                <select asp-for="@Model.Order.ShirtModelId" asp-items="@Model.ShirtModels"></select>
-            </p>
-            <p>
-                <label asp-for="@Model.Order.ShirtSizeId">Velikost:</label><br />
-                <select asp-for="@Model.Order.ShirtSizeId" asp-items="@Model.ShirtSizes"></select>
-            </p>
-        </fieldset>
-        <fieldset>
-            <legend>Zákazník</legend>
-            <p>
-                <label asp-for="@Model.Order.Name">Jméno:</label><br />
-                <input asp-for="@Model.Order.Name" type="text" />
-            </p>
-            <p>
-                <label asp-for="@Model.Order.Email">E-mail:</label><br />
-                <input asp-for="@Model.Order.Email" type="text" />
-            </p>
-            <p>
-                <label asp-for="@Model.Order.PhoneNumber">Telefon:</label><br />
-                <input asp-for="@Model.Order.PhoneNumber" type="text" />
-            </p>
-        </fieldset>
-        <fieldset>
-            <legend>Dodání</legend>
-            <p>
-                <label asp-for="@Model.Order.DeliveryMethodId">Způsob doručení:</label><br />
-                <select asp-for="@Model.Order.DeliveryMethodId" asp-items="@Model.DeliveryMethods"></select>
-            </p>
-            <p>
-                <label asp-for="@Model.Order.DeliveryMethodId">Doručovací adresa:</label><br />
-                <textarea asp-for="@Model.Order.DeliveryAddress"></textarea>
-            </p>
-        </fieldset>
-        <fieldset>
-            <legend>Poznámky</legend>
-            <textarea asp-for="@Model.Order.BuyerNotes"></textarea>
-        </fieldset>
-        <div asp-validation-summary="All"></div>
-        <input type="submit" value="Odeslat" />
-    </form>
-}
+
+<h2>Objednávka trička</h2>
+<form method="post">
+    <table class="form">
+        <tbody>
+            <tr>
+                <th>Velikost:</th>
+                <td>
+                    <select asp-for="Order.ShirtSizeId" asp-items="Model.ShirtSizes"></select>
+                </td>
+            </tr>
+            <tr>
+                <th>Typ:</th>
+                <td>
+                    <select asp-for="Order.ShirtTypeId" asp-items="Model.ShirtTypes"></select>
+                </td>
+            </tr>
+            <tr>
+                <th>E-mail:</th>
+                <td><input asp-for="Order.EmailAddress" /></td>
+            </tr>
+            <tr>
+                <th>Jméno a příjmení:</th>
+                <td><input asp-for="Order.FullName" /></td>
+            </tr>
+            <tr>
+                <th>Ulice a číslo:</th>
+                <td><input asp-for="Order.Street" /></td>
+            </tr>
+            <tr>
+                <th>Místo:</th>
+                <td><input asp-for="Order.City" /></td>
+            </tr>
+            <tr>
+                <th>PSČ:</th>
+                <td><input asp-for="Order.ZipCode" /></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <td>
+                    <div asp-validation-summary="All"></div>
+                    <input type="submit" value="Odeslat" />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</form>

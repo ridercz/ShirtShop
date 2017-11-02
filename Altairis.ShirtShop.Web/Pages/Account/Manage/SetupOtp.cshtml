@@ -1,0 +1,88 @@
+﻿@page
+@model SetupOtpModel
+<h2>Dvoufaktorová autentizace</h2>
+<form method="post">
+    @if (this.Model.CurrentOtpStatus == SetupOtpModel.OtpStatus.Enabled) {
+        <p>Dvoufaktorová autentizace je nyní <b>zapnutá</b>. Pokud ji chcete vypnout, musíte zadat heslo.</p>
+        <table class="form">
+            <tbody>
+                <tr>
+                    <th>Současné heslo:</th>
+                    <td><input asp-for="Input.Password" /></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <td>
+                        <div asp-validation-summary="All"></div>
+                        <input type="submit" value="Vypnout 2FA" />
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    }
+    else if (this.Model.CurrentOtpStatus == SetupOtpModel.OtpStatus.Disabled) {
+        <p>Dvoufaktorová autentizace je nyní <b>vypnutá</b>.</p>
+        <div id="otpuri" data-qr-content="@Model.OtpUri"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.3.1/qrcode.min.js"></script>
+        <script type="text/javascript">
+            var qre = document.getElementById('otpuri');
+            var qrg = qrcode(0, 'L');
+            qrg.addData(qre.getAttribute("data-qr-content"));
+            qrg.make();
+            qre.innerHTML = qrg.createImgTag(5, 50);
+        </script>
+        <ol>
+            <li>
+                Stáhněte si aplikaci pro generování autentizačních kódů,
+                např. Microsoft Authenticator pro
+                <a href="https://go.microsoft.com/fwlink/?Linkid=825071">Windows Phone</a>,
+                <a href="https://go.microsoft.com/fwlink/?Linkid=825072">Android</a>,
+                <a href="https://go.microsoft.com/fwlink/?Linkid=825073">iOS</a>
+            </li>
+            <li>
+                Naskenujte do aplikace QR kód nebo ručně zadejte následující seed
+                (nezáleží na velikosti písmen, mezerách či pomlčkách):<br />
+                <b><code>@this.Model.FormattedSecret</code></b>
+            </li>
+            <li>Zadejte aplikací vygenerovaný autentizační kód do pole níže a odešlete</li>
+        </ol>
+        <table class="form">
+            <tbody>
+                <tr>
+                    <th>Současné heslo:</th>
+                    <td><input asp-for="Input.Password" /></td>
+                </tr>
+                <tr>
+                    <th>Autentizační kód:</th>
+                    <td><input asp-for="Input.OtpCode" /></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <td>
+                        <div asp-validation-summary="All"></div>
+                        <input type="submit" value="Zapnout 2FA" />
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    }
+    else if (this.Model.CurrentOtpStatus == SetupOtpModel.OtpStatus.Setup) {
+        <p>Právě jste zapnuli dvoufaktorovou autentizaci.</p>
+        <p>
+            Pro případ, že byste v budoucnu ztratili zařízení, které generuje autentizační
+            kódy, vygenerovali jsme pro vás speciální jednorázové záchranné kódy, které
+            můžete v nouzi použít pro přihlášení (každý pouze jednou). Tyto kódy si teď
+            hned pečlivě uschovejte. Nebude možné je později zobrazit a bez nich nedokážete
+            získat nouzový přístup ke svému účtu.
+        </p>
+        <ul>
+            @foreach (var code in this.Model.RecoveryCodes) {
+                <li><b><code>@code</code></b></li>
+            }
+        </ul>
+    }
+</form>

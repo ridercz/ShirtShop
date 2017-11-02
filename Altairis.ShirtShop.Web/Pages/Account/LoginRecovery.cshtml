@@ -1,0 +1,23 @@
+﻿@page
+@model LoginRecoveryModel
+<h2>Přihlášení záchranným recovery kódem</h2>
+<p>Zadejte jednorázový záchranný recovery kód.</p>
+<form method="post">
+    <table class="form">
+        <tbody>
+            <tr>
+                <th>Záchranný kód:</th>
+                <td><input asp-for="RecoveryCode" /></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <td>
+                    <div asp-validation-summary="All"></div>
+                    <input type="submit" value="Odeslat" />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</form>

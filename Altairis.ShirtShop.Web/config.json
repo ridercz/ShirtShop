@@ -1,9 +1,14 @@
 {
-  "DbFileName": "ShirtShop.db",
-  "OrderEmailAddress": "orders@example.com",
+  "ConnectionStrings": {
+    "ShopDb": "SERVER=.\\SqlExpress;TRUSTED_CONNECTION=yes;DATABASE=ShirtShop_final"
+  },
+  "Payment": {
+    "AccountNumber": "12345678/1234",
+    "VarSymbolFormat": "9900{0:000000}"
+  },
   "Mailing": {
-    "SenderName": "T-Shirt Shop",
-    "SenderEmail": "shirtshop@example.com",
-    "PickupFolder": "C:\\InetPub\\MailRoot\\pickup"
+    "PickupFolder": "C:\\InetPub\\MailRoot\\Pickup",
+    "SenderAddress": "www-daemon@example.com",
+    "OrderRecipientAddress": "orders@example.com"
   }
 }

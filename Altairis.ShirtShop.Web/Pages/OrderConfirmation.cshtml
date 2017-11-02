@@ -1,0 +1,13 @@
+﻿@page "{OrderId:int}"
+@inject Microsoft.Extensions.Options.IOptions<ShopConfig> ConfigAccessor
+@{
+    var orderId = Convert.ToInt32(this.RouteData.Values["OrderId"]);
+    var varSymbol = string.Format(this.ConfigAccessor.Value.Payment.VarSymbolFormat, orderId);
+}
+<h2>Objednávka trička</h2>
+<p>Vaše objednávka byla přijata pod číslem <b>@orderId</b>.</p>
+<p>
+    Platbu prosím pošlete na účet číslo
+    <b>@this.ConfigAccessor.Value.Payment.AccountNumber</b>
+    s variabilním symbolem <b>@varSymbol</b>
+</p>

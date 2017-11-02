@@ -1,0 +1,14 @@
+﻿@model Altairis.ShirtShop.Web.Components.MenuModel
+<nav class="user">
+    <aside>
+        @Model.FullName (@Model.UserName)
+    </aside>
+    <ul>
+        <li><a asp-page="/Index">Úvod</a></li>
+        <li><a asp-page="/Account/Manage/Profile">Můj profil</a></li>
+        <li><a asp-page="/Account/Manage/ChangePassword">Změna hesla</a></li>
+        <li><a asp-page="/Account/Manage/ChangeEmail">Změna e-mailu</a></li>
+        <li><a asp-page="/Account/Manage/SetupOtp">Nastavení 2FA</a></li>
+        <li><a asp-page="/Account/Logout">Odhlášení</a></li>
+    </ul>
+</nav>

@@ -1,11 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altairis.ShirtShop.Data", "Altairis.ShirtShop.Data\Altairis.ShirtShop.Data.csproj", "{0B35DDE6-EEAB-470D-94F4-843E323DA67D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altairis.ShirtShop.Data", "Altairis.ShirtShop.Data\Altairis.ShirtShop.Data.csproj", "{159BDDFF-9FBB-4DE2-8DD1-83C61941535B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altairis.ShirtShop.Web", "Altairis.ShirtShop.Web\Altairis.ShirtShop.Web.csproj", "{BFD19D6C-A276-4D5B-8750-00553D775F03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altairis.ShirtShop.Web", "Altairis.ShirtShop.Web\Altairis.ShirtShop.Web.csproj", "{44253332-DA5B-4B19-A716-3E10741A943E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2EB4C91D-FAFA-4AE8-A758-40B202FDAD39}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,19 +20,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0B35DDE6-EEAB-470D-94F4-843E323DA67D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0B35DDE6-EEAB-470D-94F4-843E323DA67D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0B35DDE6-EEAB-470D-94F4-843E323DA67D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0B35DDE6-EEAB-470D-94F4-843E323DA67D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BFD19D6C-A276-4D5B-8750-00553D775F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BFD19D6C-A276-4D5B-8750-00553D775F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BFD19D6C-A276-4D5B-8750-00553D775F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BFD19D6C-A276-4D5B-8750-00553D775F03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{159BDDFF-9FBB-4DE2-8DD1-83C61941535B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{159BDDFF-9FBB-4DE2-8DD1-83C61941535B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{159BDDFF-9FBB-4DE2-8DD1-83C61941535B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{159BDDFF-9FBB-4DE2-8DD1-83C61941535B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44253332-DA5B-4B19-A716-3E10741A943E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44253332-DA5B-4B19-A716-3E10741A943E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44253332-DA5B-4B19-A716-3E10741A943E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44253332-DA5B-4B19-A716-3E10741A943E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {5DB447A4-FED8-4C54-BB3B-EA2605716E6D}
+		SolutionGuid = {5500177F-F44F-4136-BE0C-2203DE5E1A3C}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,125 @@
+﻿body {
+    background-color: #ccc;
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+}
+
+    body > header {
+        background-color: #080;
+        padding: 1ex;
+    }
+
+    body > footer {
+        border-top: solid 3px #080;
+        margin-top: 3em;
+        padding: 1em;
+        font-size: 80%;
+        text-align: right;
+        color: #080;
+    }
+
+    body > nav {
+        padding: .5ex 1ex;
+        color: #fff;
+    }
+
+        body > nav.anonymous {
+            background-color: #000;
+        }
+
+        body > nav.user {
+            background-color: #060;
+        }
+
+        body > nav.admin {
+            background-color: #600;
+        }
+
+        body > nav aside {
+            float: right;
+        }
+
+        body > nav a:link, body > nav a:visited {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        body > nav a:hover {
+            color: #fc0;
+        }
+
+        body > nav ul {
+            margin: 0;
+            padding: 0;
+            display: inline;
+        }
+
+            body > nav ul li {
+                margin: 0;
+                padding: 0;
+                display: inline;
+            }
+
+                body > nav ul li:nth-last-child(n+2)::after {
+                    content: ' | ';
+                }
+
+table.form {
+    border: none;
+    border-collapse: collapse;
+}
+
+    table.form tbody th {
+        padding: 0 1ex 1ex 0;
+        text-align: left;
+    }
+
+    table.form tbody td {
+        padding: 0 0 1ex 0;
+    }
+
+form input, form select {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    padding: .5ex;
+    box-sizing: border-box;
+    width: 30em;
+}
+
+    form input[type=submit] {
+        padding: 1ex 3em;
+        width: auto;
+    }
+
+    form input[type=checkbox] {
+        width: 1.5em;
+        height: 1.5em;
+        vertical-align: middle;
+        padding: 0;
+        margin: 0;
+    }
+
+div.validation-summary-valid {
+    display: none;
+}
+
+div.validation-summary-errors {
+    color: #c00;
+}
+
+table.grid {
+    border: none;
+    border-collapse: collapse;
+}
+
+    table.grid th {
+        border: 1px solid #666;
+        background-color: #999;
+        padding: .5ex 1ex;
+    }
+
+    table.grid td {
+        border: 1px solid #666;
+        padding: .5ex 1ex;
+    }
