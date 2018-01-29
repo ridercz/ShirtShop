@@ -32,7 +32,7 @@ namespace Altairis.ShirtShop.Web.Pages.Account {
             if (!this.ModelState.IsValid) return this.Page();
 
             // Try to find user by name
-            var user = await this._userManager.FindByNameAsync(this.Input.UserNameUserName);
+            var user = await this._userManager.FindByNameAsync(this.Input.UserName);
 
             // Redirect to done page if user does not exist to block account enumeration
             if (user == null) return this.RedirectToPage("ForgotPasswordDone");
