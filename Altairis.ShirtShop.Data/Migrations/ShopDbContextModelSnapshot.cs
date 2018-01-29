@@ -17,7 +17,7 @@ namespace Altairis.ShirtShop.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
+                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Altairis.ShirtShop.Data.Order", b =>
@@ -113,9 +113,15 @@ namespace Altairis.ShirtShop.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<bool>("Enabled");
+
+                    b.Property<bool>("Enabled2");
+
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<DateTimeOffset?>("LastLoginDate");
 
                     b.Property<bool>("LockoutEnabled");
 

@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Altairis.Services.Mailing;
 using Altairis.Services.Mailing.Rfc2822;
 using Altairis.ShirtShop.Data;
+using Altairis.ShirtShop.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,11 +19,45 @@ namespace Altairis.ShirtShop.Web {
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("config.json", optional: false)
                 .AddJsonFile($"config.{env.EnvironmentName}.json", optional: true)
+                .AddUserSecrets<Startup>()
                 .AddEnvironmentVariables();
             this._config = builder.Build();
         }
 
         public void ConfigureServices(IServiceCollection services) {
+            var authenticationBuilder = services.AddAuthentication();
+            if (!string.IsNullOrEmpty(_config["IdentityProviders:TestIdentityServer:ClientId"])) {
+                authenticationBuilder.AddOpenIdConnect("TestOIDC", "Test IdentityServer", options => {
+                    options.Authority = "http://localhost:5000/";
+                    options.ClientId = _config["IdentityProviders:TestIdentityServer:ClientId"];
+                    options.ClientSecret = _config["IdentityProviders:TestIdentityServer:ClientSecret"];
+                    options.RequireHttpsMetadata = false;
+                });
+            }
+            if (!string.IsNullOrEmpty(_config["IdentityProviders:Microsoft:ClientId"])) {
+                authenticationBuilder.AddMicrosoftAccount(options => {
+                    options.ClientId = _config["IdentityProviders:Microsoft:ClientId"];
+                    options.ClientSecret = _config["IdentityProviders:Microsoft:ClientSecret"];
+                });
+            }
+            if (!string.IsNullOrEmpty(_config["IdentityProviders:Facebook:ClientId"])) {
+                authenticationBuilder.AddFacebook(options => {
+                    options.ClientId = _config["IdentityProviders:Facebook:ClientId"];
+                    options.ClientSecret = _config["IdentityProviders:Facebook:ClientSecret"];
+                });
+            }
+            if (!string.IsNullOrEmpty(_config["IdentityProviders:Google:ClientId"])) {
+                authenticationBuilder.AddGoogle(options => {
+                    options.ClientId = _config["IdentityProviders:Google:ClientId"];
+                    options.ClientSecret = _config["IdentityProviders:Google:ClientSecret"];
+                });
+            }
+            if (!string.IsNullOrEmpty(_config["IdentityProviders:Twitter:ClientId"])) {
+                authenticationBuilder.AddTwitter(options => {
+                    options.ConsumerKey = _config["IdentityProviders:Twitter:ClientId"];
+                    options.ConsumerSecret = _config["IdentityProviders:Twitter:ClientSecret"];
+                });
+            }
             services.AddAuthorization(options => {
                 options.AddPolicy("IsLoggedIn", policy => policy.RequireAuthenticatedUser());
                 options.AddPolicy("IsAdmin", policy => policy.RequireRole("Administrators"));
@@ -40,6 +71,8 @@ namespace Altairis.ShirtShop.Web {
                 options.UseSqlServer(this._config.GetConnectionString("ShopDb"));
             });
             services.Configure<ShopConfig>(this._config);
+            //services.AddScoped<IPasswordHasher<ShopUser>, NullPasswordHasher<ShopUser>>();
+            services.AddScoped<IPasswordHasher<ShopUser>, UpgradePasswordHasher<ShopUser>>();
             services.AddIdentity<ShopUser, IdentityRole>(options => {
                 options.Password.RequiredLength = 12;
                 options.Password.RequiredUniqueChars = 4;
@@ -50,7 +83,11 @@ namespace Altairis.ShirtShop.Web {
                 options.SignIn.RequireConfirmedEmail = true;
             })
                 .AddEntityFrameworkStores<ShopDbContext>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders()
+                .AddSignInManager<ShopSignInManager>();
+            services.Configure<SecurityStampValidatorOptions>(options => {
+                options.ValidationInterval = TimeSpan.Zero;
+            });
             services.ConfigureApplicationCookie(options => {
                 options.LoginPath = "/Account/Login";
                 options.LogoutPath = "/Account/Logout";

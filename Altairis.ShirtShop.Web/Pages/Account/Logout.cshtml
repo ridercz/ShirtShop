@@ -1,5 +1,15 @@
 ﻿@page
 @model LogoutModel
-<h2>Odhlášení</h2>
-<p>Byli jste úspěšně odhlášeni.</p>
-@*<p>[<a asp-page="/Index">Home</a>]</p>*@
+<form method="post">
+    <h2>Odhlášení</h2>
+    @*<p>Byli jste úspěšně odhlášeni.</p>*@
+    <p>Opravdu se chcete odhlásit?</p>
+    <p>
+        <input asp-for="AllDevices" />
+        <label asp-for="AllDevices">odhlásit na všech zařízeních</label>
+    </p>
+    <p>
+        <input type="submit" value="Ano" />
+        <input type="submit" asp-page-handler="Cancel" value="Ne" />
+    </p>
+</form>

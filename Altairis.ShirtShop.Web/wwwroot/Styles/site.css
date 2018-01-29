@@ -87,7 +87,7 @@ form input, form select {
     width: 30em;
 }
 
-    form input[type=submit] {
+    form input[type=submit], form input[type=button], button {
         padding: 1ex 3em;
         width: auto;
     }

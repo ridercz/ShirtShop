@@ -31,7 +31,16 @@
         </tfoot>
     </table>
 </form>
-@*<p>
-    [<a asp-page="ForgotPassword">Reset zapomenutého hesla</a>]
-    [<a asp-page="Register">Registrace nového uživatele</a>]
-</p>*@
+@if (this.Model.IdentityProviders.Any()) {
+    <h2>Přihlášení pomocí dalších služeb</h2>
+    <p>Můžete se přihlásit také prostřednictvím následujících služeb:</p>
+    <ul>
+        @foreach (var idp in this.Model.IdentityProviders) {
+            <li>
+                <a asp-page="LoginExternal"
+                   asp-route-idpName="@idp.Name"
+                   asp-route-returnUrl="@this.Request.Query["returnUrl"]">@idp.DisplayName</a>
+            </li>
+        }
+    </ul>
+}

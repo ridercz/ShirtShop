@@ -35,31 +35,31 @@ namespace Altairis.ShirtShop.Web {
             this._context.Seed();
         }
 
-private async Task InitIdentity() {
-    // Create Administrators role if not exists
-    var roleExists = await this._roleManager.RoleExistsAsync(ROLE_NAME);
-    if (!roleExists) {
-        EnsureIdentitySuccess(() => this._roleManager.CreateAsync(new IdentityRole(ROLE_NAME)));
-    }
+        private async Task InitIdentity() {
+            // Create Administrators role if not exists
+            var roleExists = await this._roleManager.RoleExistsAsync(ROLE_NAME);
+            if (!roleExists) {
+                EnsureIdentitySuccess(() => this._roleManager.CreateAsync(new IdentityRole(ROLE_NAME)));
+            }
 
-    // Create Admin user if not exists
-    var adminUser = await this._userManager.FindByNameAsync("admin");
-    if (adminUser == null) {
-        adminUser = new ShopUser {
-            UserName = "admin",
-            Email = "admin@example.com",
-            EmailConfirmed = true,
-            FullName = "System Administrator"
-        };
-        EnsureIdentitySuccess(() => this._userManager.CreateAsync(adminUser, DEFAULT_PASSWORD));
-    }
+            // Create Admin user if not exists
+            var adminUser = await this._userManager.FindByNameAsync("admin");
+            if (adminUser == null) {
+                adminUser = new ShopUser {
+                    UserName = "admin",
+                    Email = "admin@example.com",
+                    EmailConfirmed = true,
+                    FullName = "System Administrator"
+                };
+                EnsureIdentitySuccess(() => this._userManager.CreateAsync(adminUser, DEFAULT_PASSWORD));
+            }
 
-    // Add Admin user to Administrators role if not already member
-    var isInRole = await this._userManager.IsInRoleAsync(adminUser, ROLE_NAME);
-    if (!isInRole) {
-        EnsureIdentitySuccess(() => this._userManager.AddToRoleAsync(adminUser, ROLE_NAME));
-    }
-}
+            // Add Admin user to Administrators role if not already member
+            var isInRole = await this._userManager.IsInRoleAsync(adminUser, ROLE_NAME);
+            if (!isInRole) {
+                EnsureIdentitySuccess(() => this._userManager.AddToRoleAsync(adminUser, ROLE_NAME));
+            }
+        }
 
         private static void EnsureIdentitySuccess(Func<Task<IdentityResult>> op) {
             var result = op().Result;

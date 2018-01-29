@@ -1,0 +1,27 @@
+﻿@page
+@model ExternalLoginsModel
+
+<h2>Přihlášení pomocí služeb třetích stran</h2>
+
+@if (this.Model.AvailableLogins.Any()) {
+    <h3>Propojit nový účet</h3>
+    <ul>
+        @foreach (var idp in this.Model.AvailableLogins) {
+            <li>
+                <a asp-page-handler="Initiate" asp-route-idpName="@idp.Name">@idp.DisplayName</a>
+            </li>
+        }
+    </ul>
+}
+
+@if (this.Model.CurrentLogins.Any()) {
+    <h3>Současná propojení</h3>
+    <ul>
+        @foreach (var login in this.Model.CurrentLogins) {
+            <li>
+                <b>@login.ProviderDisplayName</b>
+                <a asp-page="ExternalLoginDelete" asp-route-idpName="@login.LoginProvider" asp-route-idpKey="@login.ProviderKey">[odstranit]</a>
+            </li>
+        }
+    </ul>
+}
