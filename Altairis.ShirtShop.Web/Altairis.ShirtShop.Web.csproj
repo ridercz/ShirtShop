@@ -6,8 +6,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Altairis.Services.Mailing.Rfc2822" Version="1.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Altairis.ShirtShop.Data\Altairis.ShirtShop.Data.csproj" />
