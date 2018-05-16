@@ -11,9 +11,10 @@ using System;
 namespace Altairis.ShirtShop.Data.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    partial class ShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171216120050_Add_User_Enabled_LastLoginDate")]
+    partial class Add_User_Enabled_LastLoginDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

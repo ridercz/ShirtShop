@@ -16,8 +16,14 @@ namespace Altairis.ShirtShop.Web.Pages.Account {
             this._signInManager = signInManager;
         }
 
-        [Required, BindProperty]
-        public string RecoveryCode { get; set; }
+        [BindProperty]
+        public InputModel Input { get; set; }
+
+        public class InputModel {
+            [Required]
+            public string RecoveryCode { get; set; }
+
+        }
 
         public async Task<IActionResult> OnGetAsync() {
             var user = await this._signInManager.GetTwoFactorAuthenticationUserAsync();
@@ -31,7 +37,7 @@ namespace Altairis.ShirtShop.Web.Pages.Account {
             if (user == null) return this.RedirectToPage("Login");
 
             // Verify recovery code
-            var result = await _signInManager.TwoFactorRecoveryCodeSignInAsync(this.RecoveryCode);
+            var result = await _signInManager.TwoFactorRecoveryCodeSignInAsync(this.Input.RecoveryCode);
 
             // Redirect to 2FA setup target page when logged in
             if (result.Succeeded) return this.RedirectToPage("/Account/Manage/SetupOtp");

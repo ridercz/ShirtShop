@@ -20,14 +20,19 @@ namespace Altairis.ShirtShop.Web.Pages.Account {
             this._mailerService = mailerService;
         }
 
-        [BindProperty, Required]
-        public string UserName { get; set; }
+        [BindProperty]
+        public InputModel Input { get; set; }
+
+        public class InputModel {
+            [Required]
+            public string UserName { get; set; }
+        }
 
         public async Task<IActionResult> OnPostAsync() {
             if (!this.ModelState.IsValid) return this.Page();
 
             // Try to find user by name
-            var user = await this._userManager.FindByNameAsync(this.UserName);
+            var user = await this._userManager.FindByNameAsync(this.Input.UserName);
 
             // Redirect to done page if user does not exist to block account enumeration
             if (user == null) return this.RedirectToPage("ForgotPasswordDone");

@@ -32,8 +32,8 @@ namespace Altairis.ShirtShop.Web.Pages {
             .OrderBy(x => x.SortPriority)
             .Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
 
-        [BindProperty]
-        public Order Order { get; set; }
+[BindProperty]
+public Order Order { get; set; }
 
         public async Task<IActionResult> OnPostAsync() {
             // Validate input
@@ -41,13 +41,6 @@ namespace Altairis.ShirtShop.Web.Pages {
 
             // Set date created (overposting protection)
             this.Order.DateCreated = DateTime.Now;
-
-#if !ENABLE_OVERPOSTING_BUG
-            // Overposting protection
-            this.Order.DateCreated = DateTime.Now;
-            this.Order.DatePaid = null;
-            this.Order.DateSent = null;
-#endif
 
             // Save to database
             await this._context.Orders.AddAsync(this.Order);

@@ -5,23 +5,11 @@
     <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Bootstrap\**" />
-    <Content Remove="Bootstrap\**" />
-    <EmbeddedResource Remove="Bootstrap\**" />
-    <None Remove="Bootstrap\**" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Altairis.Services.Mailing.Rfc2822" Version="1.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Altairis.ShirtShop.Data\Altairis.ShirtShop.Data.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\Admin\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Pages\Account\Manage\ChangeEmailDone.cshtml" />
   </ItemGroup>
 </Project>

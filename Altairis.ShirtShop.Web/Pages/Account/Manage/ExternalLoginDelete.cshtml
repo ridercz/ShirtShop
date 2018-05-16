@@ -1,0 +1,11 @@
+﻿@page "{idpName}"
+@model ExternalLoginDeleteModel
+
+<h2>Odstranění propojení účtu</h2>
+<form method="post">
+    <p>Opravdu chcete odstranit propojení svého účtu se službou <b>@this.Model.IdpDisplayName</b>?</p>
+    <p>
+        <input type="submit" value="Ano" />
+        <input type="submit" asp-page-handler="Cancel" value="Ne" />
+    </p>
+</form>

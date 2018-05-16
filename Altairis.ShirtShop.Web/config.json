@@ -1,6 +1,6 @@
 {
   "ConnectionStrings": {
-    "ShopDb": "SERVER=.\\SqlExpress;TRUSTED_CONNECTION=yes;DATABASE=ShirtShop_final"
+    "ShopDb": "SERVER=.\\SqlExpress;TRUSTED_CONNECTION=yes;DATABASE=ShirtShop"
   },
   "Payment": {
     "AccountNumber": "12345678/1234",

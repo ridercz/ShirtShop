@@ -10,5 +10,9 @@ namespace Altairis.ShirtShop.Data {
         [Required, MaxLength(50)]
         public string FullName { get; set; }
 
+        public bool Enabled { get; set; } = true;
+
+        public DateTimeOffset? LastLoginDate { get; set; }
+
     }
 }
