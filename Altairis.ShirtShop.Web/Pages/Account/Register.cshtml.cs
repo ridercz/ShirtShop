@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Altairis.Services.Mailing;
+using Altairis.ShirtShop.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Identity;
-using Altairis.ShirtShop.Data;
-using Altairis.Services.Mailing;
-using System.ComponentModel.DataAnnotations;
-using System.Net;
 
 namespace Altairis.ShirtShop.Web.Pages.Account {
     public class RegisterModel : PageModel {
@@ -56,12 +56,12 @@ namespace Altairis.ShirtShop.Web.Pages.Account {
             if (!result.Succeeded) {
                 foreach (var error in result.Errors) {
                     this.ModelState.AddModelError(string.Empty, error.Description);
-                    return this.Page();
                 }
+                return this.Page();
             }
 
             // Get email confirmation token
-            var token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
+            var token = await this._userManager.GenerateEmailConfirmationTokenAsync(newUser);
 
             // Get email confirmation URL
             var url = this.Url.Page("/Account/ConfirmEmail",
