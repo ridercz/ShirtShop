@@ -1,0 +1,12 @@
+﻿@page "{lasid}/{handler?}"
+@model ApproveLoginModel
+<h2>Potvrzení přihlášení</h2>
+<form method="post">
+    <p>Chcete potvrdit přihlášení s ID <strong>@this.Model.DisplaySessionId</strong>?</p>
+    <ul>
+        <li>IP adresa: <code>@this.Model.RequesterIpAddress</code></li>
+        <li>Prohlížeč: <code>@this.Model.RequesterUserAgent</code></li>
+    </ul>
+    <button asp-page-handler="Approve">Ano</button>
+    <button asp-page-handler="Decline">Ne</button>
+</form>

@@ -1,0 +1,14 @@
+﻿@page "{lasid?}"
+@model LoginApprovalRequestModel
+<h2>Přihlášení pomocí mobilního zařízení</h2>
+<p>Na svém mobilním zařízení prosím přejděte na následující adresu a potvrďte požadavek na přihlášení ID <strong>@Model.DisplaySessionId</strong>.</p>
+<pre>@this.Model.ApprovalUrl</pre>
+<div id="otpuri" data-qr-content="@Model.ApprovalUrl"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.3.1/qrcode.min.js"></script>
+<script type="text/javascript">
+    var qre = document.getElementById('otpuri');
+    var qrg = qrcode(0, 'L');
+    qrg.addData(qre.getAttribute("data-qr-content"));
+    qrg.make();
+    qre.innerHTML = qrg.createImgTag(5, 50);
+</script>

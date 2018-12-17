@@ -14,11 +14,11 @@ namespace Altairis.ShirtShop.Web.Services {
     }
 
     public class LoginApprovalManager {
-        private readonly HttpContextAccessor httpContextAccessor;
+        private readonly IHttpContextAccessor httpContextAccessor;
         private readonly ILoginApprovalSessionStore sessionStore;
         private readonly LoginApprovalManagerOptions options;
 
-        public LoginApprovalManager(ILoginApprovalSessionStore sessionStore, HttpContextAccessor httpContextAccessor, IOptions<LoginApprovalManagerOptions> optionsAccessor = null) {
+        public LoginApprovalManager(ILoginApprovalSessionStore sessionStore, IHttpContextAccessor httpContextAccessor, IOptions<LoginApprovalManagerOptions> optionsAccessor = null) {
             this.sessionStore = sessionStore;
             this.httpContextAccessor = httpContextAccessor;
             this.options = optionsAccessor?.Value ?? new LoginApprovalManagerOptions();
@@ -40,9 +40,11 @@ namespace Altairis.ShirtShop.Web.Services {
             return this.sessionStore.Find(sessionId);
         }
 
-        public LoginApprovalSessionStatus CheckStatus(string sessionId) {
+        public LoginApprovalSessionStatus CheckStatus(string sessionId, out string userName) {
             if (sessionId == null) throw new ArgumentNullException(nameof(sessionId));
             if (string.IsNullOrWhiteSpace(sessionId)) throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(sessionId));
+
+            userName = null;
 
             // Get session
             var session = this.sessionStore.Find(sessionId);
@@ -51,6 +53,7 @@ namespace Altairis.ShirtShop.Web.Services {
             // If session is approved, delete it
             if (session.Approved) {
                 this.sessionStore.Delete(sessionId);
+                userName = session.UserName;
                 return LoginApprovalSessionStatus.Approved;
             } else {
                 return LoginApprovalSessionStatus.Waiting;

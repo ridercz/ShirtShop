@@ -5,6 +5,7 @@ using Altairis.ShirtShop.Data;
 using Altairis.ShirtShop.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,28 +27,28 @@ namespace Altairis.ShirtShop.Web {
 
         public void ConfigureServices(IServiceCollection services) {
             var authenticationBuilder = services.AddAuthentication();
-            if (!string.IsNullOrEmpty(_config["IdentityProviders:Microsoft:ClientId"])) {
+            if (!string.IsNullOrEmpty(this._config["IdentityProviders:Microsoft:ClientId"])) {
                 authenticationBuilder.AddMicrosoftAccount(options => {
-                    options.ClientId = _config["IdentityProviders:Microsoft:ClientId"];
-                    options.ClientSecret = _config["IdentityProviders:Microsoft:ClientSecret"];
+                    options.ClientId = this._config["IdentityProviders:Microsoft:ClientId"];
+                    options.ClientSecret = this._config["IdentityProviders:Microsoft:ClientSecret"];
                 });
             }
-            if (!string.IsNullOrEmpty(_config["IdentityProviders:Facebook:ClientId"])) {
+            if (!string.IsNullOrEmpty(this._config["IdentityProviders:Facebook:ClientId"])) {
                 authenticationBuilder.AddFacebook(options => {
-                    options.ClientId = _config["IdentityProviders:Facebook:ClientId"];
-                    options.ClientSecret = _config["IdentityProviders:Facebook:ClientSecret"];
+                    options.ClientId = this._config["IdentityProviders:Facebook:ClientId"];
+                    options.ClientSecret = this._config["IdentityProviders:Facebook:ClientSecret"];
                 });
             }
-            if (!string.IsNullOrEmpty(_config["IdentityProviders:Google:ClientId"])) {
+            if (!string.IsNullOrEmpty(this._config["IdentityProviders:Google:ClientId"])) {
                 authenticationBuilder.AddGoogle(options => {
-                    options.ClientId = _config["IdentityProviders:Google:ClientId"];
-                    options.ClientSecret = _config["IdentityProviders:Google:ClientSecret"];
+                    options.ClientId = this._config["IdentityProviders:Google:ClientId"];
+                    options.ClientSecret = this._config["IdentityProviders:Google:ClientSecret"];
                 });
             }
-            if (!string.IsNullOrEmpty(_config["IdentityProviders:Twitter:ClientId"])) {
+            if (!string.IsNullOrEmpty(this._config["IdentityProviders:Twitter:ClientId"])) {
                 authenticationBuilder.AddTwitter(options => {
-                    options.ConsumerKey = _config["IdentityProviders:Twitter:ClientId"];
-                    options.ConsumerSecret = _config["IdentityProviders:Twitter:ClientSecret"];
+                    options.ConsumerKey = this._config["IdentityProviders:Twitter:ClientId"];
+                    options.ConsumerSecret = this._config["IdentityProviders:Twitter:ClientSecret"];
                 });
             }
             services.AddAuthorization(options => {
@@ -97,6 +98,11 @@ namespace Altairis.ShirtShop.Web {
             });
 
             services.AddTransient<Bootstrapper>();
+
+            // Login approval infrastructure
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<ILoginApprovalSessionStore>(new InMemoryLoginApprovalSessionStore());
+            services.AddSingleton<LoginApprovalManager>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, Bootstrapper b) {
