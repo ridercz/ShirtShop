@@ -100,7 +100,7 @@ namespace Altairis.ShirtShop.Web {
             services.AddTransient<Bootstrapper>();
 
             // Login approval infrastructure
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
             services.AddSingleton<ILoginApprovalSessionStore>(new InMemoryLoginApprovalSessionStore());
             services.AddSingleton<LoginApprovalManager>();
         }
