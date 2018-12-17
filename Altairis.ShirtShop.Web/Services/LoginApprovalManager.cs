@@ -33,54 +33,54 @@ namespace Altairis.ShirtShop.Web.Services {
             return this.sessionStore.Create(las);
         }
 
-        public LoginApprovalSession GetLoginApprovalInfo(string sessionId) {
-            if (sessionId == null) throw new ArgumentNullException(nameof(sessionId));
-            if (string.IsNullOrWhiteSpace(sessionId)) throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(sessionId));
+        public LoginApprovalSession GetLoginApprovalInfo(string lasid) {
+            if (lasid == null) throw new ArgumentNullException(nameof(lasid));
+            if (string.IsNullOrWhiteSpace(lasid)) throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(lasid));
 
-            return this.sessionStore.Find(sessionId);
+            return this.sessionStore.Find(lasid);
         }
 
-        public LoginApprovalSessionStatus CheckStatus(string sessionId, out string userName) {
-            if (sessionId == null) throw new ArgumentNullException(nameof(sessionId));
-            if (string.IsNullOrWhiteSpace(sessionId)) throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(sessionId));
+        public LoginApprovalSessionStatus CheckStatus(string lasid, out string userName) {
+            if (lasid == null) throw new ArgumentNullException(nameof(lasid));
+            if (string.IsNullOrWhiteSpace(lasid)) throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(lasid));
 
             userName = null;
 
             // Get session
-            var session = this.sessionStore.Find(sessionId);
-            if (session == null) return LoginApprovalSessionStatus.DeclinedOrExpired;
+            var las = this.sessionStore.Find(lasid);
+            if (las == null) return LoginApprovalSessionStatus.DeclinedOrExpired;
 
             // If session is approved, delete it
-            if (session.Approved) {
-                this.sessionStore.Delete(sessionId);
-                userName = session.UserName;
+            if (las.Approved) {
+                this.sessionStore.Delete(lasid);
+                userName = las.UserName;
                 return LoginApprovalSessionStatus.Approved;
             } else {
                 return LoginApprovalSessionStatus.Waiting;
             }
         }
 
-        public void ApproveLogin(string sessionId) {
-            if (sessionId == null) throw new ArgumentNullException(nameof(sessionId));
-            if (string.IsNullOrWhiteSpace(sessionId)) throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(sessionId));
+        public void ApproveLogin(string lasid) {
+            if (lasid == null) throw new ArgumentNullException(nameof(lasid));
+            if (string.IsNullOrWhiteSpace(lasid)) throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(lasid));
 
             // Get session
-            var session = this.sessionStore.Find(sessionId);
-            if (session == null) return;
+            var las = this.sessionStore.Find(lasid);
+            if (las == null) return;
 
             // Get current user and ensure it's authenticated
             var uid = this.httpContextAccessor.HttpContext.User.Identity;
             if (!uid.IsAuthenticated) throw new InvalidOperationException("Only authenticated user can approve login");
 
             // Save session as approved by current user
-            this.sessionStore.Approve(sessionId, uid.Name);
+            this.sessionStore.Approve(lasid, uid.Name);
         }
 
-        public void DeclineLogin(string sessionId) {
-            if (sessionId == null) throw new ArgumentNullException(nameof(sessionId));
-            if (string.IsNullOrWhiteSpace(sessionId)) throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(sessionId));
+        public void DeclineLogin(string lasid) {
+            if (lasid == null) throw new ArgumentNullException(nameof(lasid));
+            if (string.IsNullOrWhiteSpace(lasid)) throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(lasid));
 
-            this.sessionStore.Delete(sessionId);
+            this.sessionStore.Delete(lasid);
         }
 
     }
