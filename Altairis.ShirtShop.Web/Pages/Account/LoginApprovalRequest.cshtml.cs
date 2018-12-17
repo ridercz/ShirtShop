@@ -31,7 +31,7 @@ namespace Altairis.ShirtShop.Web.Pages.Account {
                 return this.RedirectToPage(new { lasid });
             } else {
                 // Check status of session
-                var status = this.loginApprovalManager.CheckStatus(lasid, out var userName);
+                var status = this.loginApprovalManager.CheckLoginApprovalStatus(lasid, out var userName);
                 switch (status) {
                     case LoginApprovalSessionStatus.Approved:
                         // Approved - sign in

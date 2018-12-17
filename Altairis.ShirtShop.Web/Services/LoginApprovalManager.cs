@@ -40,7 +40,7 @@ namespace Altairis.ShirtShop.Web.Services {
             return this.sessionStore.Find(lasid);
         }
 
-        public LoginApprovalSessionStatus CheckStatus(string lasid, out string userName) {
+        public LoginApprovalSessionStatus CheckLoginApprovalStatus(string lasid, out string userName) {
             if (lasid == null) throw new ArgumentNullException(nameof(lasid));
             if (string.IsNullOrWhiteSpace(lasid)) throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(lasid));
 
@@ -64,13 +64,13 @@ namespace Altairis.ShirtShop.Web.Services {
             if (lasid == null) throw new ArgumentNullException(nameof(lasid));
             if (string.IsNullOrWhiteSpace(lasid)) throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(lasid));
 
-            // Get session
-            var las = this.sessionStore.Find(lasid);
-            if (las == null) return;
-
             // Get current user and ensure it's authenticated
             var uid = this.httpContextAccessor.HttpContext.User.Identity;
             if (!uid.IsAuthenticated) throw new InvalidOperationException("Only authenticated user can approve login");
+
+            // Get session
+            var las = this.sessionStore.Find(lasid);
+            if (las == null) return;
 
             // Save session as approved by current user
             this.sessionStore.Approve(lasid, uid.Name);
