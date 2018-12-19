@@ -97,6 +97,8 @@ namespace Altairis.ShirtShop.Web {
             });
 
             services.AddTransient<Bootstrapper>();
+
+            services.AddLoginApprovals();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, Bootstrapper b) {
