@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace Altairis.ShirtShop.Web.Services {
     public class NullPasswordHasher<TUser> : IPasswordHasher<TUser> where TUser : class {

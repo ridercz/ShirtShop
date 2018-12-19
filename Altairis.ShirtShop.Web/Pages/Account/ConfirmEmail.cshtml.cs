@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity;
 using Altairis.ShirtShop.Data;
@@ -12,7 +8,7 @@ namespace Altairis.ShirtShop.Web.Pages.Account {
         private readonly UserManager<ShopUser> _userManager;
 
         public ConfirmEmailModel(UserManager<ShopUser> userManager) {
-            _userManager = userManager;
+            this._userManager = userManager;
         }
 
         public string Message { get; set; }

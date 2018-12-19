@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -58,11 +57,11 @@ namespace Altairis.ShirtShop.Web.Pages.Account.Manage {
         }
 
         public async Task OnGetAsync() {
-            await LoadData(reset: true);
+            await this.LoadData(reset: true);
         }
 
         public async Task<IActionResult> OnPostAsync() {
-            await LoadData(reset: false);
+            await this.LoadData(reset: false);
 
             // Validate model
             if (!this.ModelState.IsValid) return this.Page();
@@ -71,7 +70,7 @@ namespace Altairis.ShirtShop.Web.Pages.Account.Manage {
             var user = await this._userManager.GetUserAsync(this.User);
             var passwordValid = await this._userManager.CheckPasswordAsync(user, this.Input.Password);
             if (!passwordValid) {
-                this.ModelState.AddModelError(nameof(Input.Password), "Bylo zadáno chybné heslo");
+                this.ModelState.AddModelError(nameof(this.Input.Password), "Bylo zadáno chybné heslo");
                 return this.Page();
             }
 
@@ -86,10 +85,10 @@ namespace Altairis.ShirtShop.Web.Pages.Account.Manage {
             var otpCode = Regex.Replace(this.Input.OtpCode, @"[^\d]", "");
             var otpValid = await this._userManager.VerifyTwoFactorTokenAsync(
                 user,
-                _userManager.Options.Tokens.AuthenticatorTokenProvider,
+                this._userManager.Options.Tokens.AuthenticatorTokenProvider,
                 otpCode);
             if (!otpValid) {
-                this.ModelState.AddModelError(nameof(Input.OtpCode), "Byl zadán chybný autentizační kód");
+                this.ModelState.AddModelError(nameof(this.Input.OtpCode), "Byl zadán chybný autentizační kód");
                 return this.Page();
             }
 

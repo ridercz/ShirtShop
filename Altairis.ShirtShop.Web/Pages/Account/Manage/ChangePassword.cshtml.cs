@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
 using Altairis.ShirtShop.Data;
 using Microsoft.AspNetCore.Identity;
@@ -14,8 +11,8 @@ namespace Altairis.ShirtShop.Web.Pages.Account.Manage {
         private readonly SignInManager<ShopUser> _signInManager;
 
         public ChangePasswordModel(UserManager<ShopUser> userManager, SignInManager<ShopUser> signInManager) {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            this._userManager = userManager;
+            this._signInManager = signInManager;
         }
 
         [BindProperty]
@@ -34,19 +31,19 @@ namespace Altairis.ShirtShop.Web.Pages.Account.Manage {
         }
 
         public async Task<IActionResult> OnPostAsync() {
-            if (ModelState.IsValid) {
+            if (this.ModelState.IsValid) {
                 // Get current user
-                var user = await _userManager.GetUserAsync(this.User);
+                var user = await this._userManager.GetUserAsync(this.User);
 
                 // Try to change password
-                var result = await _userManager.ChangePasswordAsync(
+                var result = await this._userManager.ChangePasswordAsync(
                     user,
                     this.Input.OldPassword,
                     this.Input.NewPassword);
 
                 if (result.Succeeded) {
                     // OK, re-sign and redirect to homepage
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    await this._signInManager.SignInAsync(user, isPersistent: false);
                     return this.RedirectToPage("ChangePasswordDone");
                 }
                 else {

@@ -8,7 +8,7 @@ namespace Altairis.ShirtShop.Web.Services {
         private readonly IPasswordHasher<TUser> _defaultHasher = new PasswordHasher<TUser>();
 
         public string HashPassword(TUser user, string password) {
-            return _defaultHasher.HashPassword(user, password);
+            return this._defaultHasher.HashPassword(user, password);
         }
 
         public PasswordVerificationResult VerifyHashedPassword(TUser user, string hashedPassword,
@@ -18,7 +18,7 @@ namespace Altairis.ShirtShop.Web.Services {
 
             // If it does not start with our magic number, use default hasher
             if (hashedPasswordData[0] != 0xFF) {
-                return _defaultHasher.VerifyHashedPassword(user, hashedPassword, providedPassword);
+                return this._defaultHasher.VerifyHashedPassword(user, hashedPassword, providedPassword);
             }
 
             // It starts with our magic number, so get the original salt and twice-hashed hash
@@ -33,7 +33,7 @@ namespace Altairis.ShirtShop.Web.Services {
             }
 
             // Verify the old hash using default hasher
-            var result = _defaultHasher.VerifyHashedPassword(user, hashString, oldHashString);
+            var result = this._defaultHasher.VerifyHashedPassword(user, hashString, oldHashString);
 
             // Request rehash when needed
             if (result == PasswordVerificationResult.Success) {

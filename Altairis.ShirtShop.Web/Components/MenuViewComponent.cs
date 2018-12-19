@@ -1,9 +1,6 @@
 ﻿using Altairis.ShirtShop.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Altairis.ShirtShop.Web.Components {
@@ -21,7 +18,7 @@ namespace Altairis.ShirtShop.Web.Components {
             }
 
             // Get non-anonymous user
-            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            var user = await this._userManager.FindByNameAsync(this.User.Identity.Name);
             var model = new MenuModel {
                 UserName = user.UserName,
                 FullName = user.FullName

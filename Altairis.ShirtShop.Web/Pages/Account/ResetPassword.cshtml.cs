@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
 using Altairis.ShirtShop.Data;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +10,7 @@ namespace Altairis.ShirtShop.Web.Pages.Account {
         private readonly UserManager<ShopUser> _userManager;
 
         public ResetPasswordModel(UserManager<ShopUser> userManager) {
-            _userManager = userManager;
+            this._userManager = userManager;
         }
 
         [BindProperty]
@@ -30,16 +27,16 @@ namespace Altairis.ShirtShop.Web.Pages.Account {
         }
 
         public async Task<IActionResult> OnPostAsync(string userId, string token) {
-            if (!ModelState.IsValid) return Page();
+            if (!this.ModelState.IsValid) return this.Page();
 
             // Try to find user by ID
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await this._userManager.FindByIdAsync(userId);
 
             // Redirect to done page if user does not exist to block account enumeration
             if (user == null) return this.RedirectToPage("ResetPasswordDone");
 
             // Try to reset password
-            var result = await _userManager.ResetPasswordAsync(
+            var result = await this._userManager.ResetPasswordAsync(
                 user,
                 token,
                 this.Input.Password);
@@ -54,7 +51,7 @@ namespace Altairis.ShirtShop.Web.Pages.Account {
                     this.ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-            return Page();
+            return this.Page();
         }
     }
 }

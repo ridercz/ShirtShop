@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -40,7 +37,7 @@ namespace Altairis.ShirtShop.Web.Pages.Account {
 
             // Verify OTP code
             var otpCode = Regex.Replace(this.Input.OtpCode, @"[^\d]", "");
-            var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(
+            var result = await this._signInManager.TwoFactorAuthenticatorSignInAsync(
                 otpCode,
                 rememberMe,
                 this.Input.RememberDevice);

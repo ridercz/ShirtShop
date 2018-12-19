@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Altairis.ShirtShop.Data;
 using Microsoft.AspNetCore.Identity;
@@ -12,7 +9,7 @@ namespace Altairis.ShirtShop.Web.Pages.Account {
         private readonly SignInManager<ShopUser> _signInManager;
 
         public LoginExternalCallbackModel(SignInManager<ShopUser> signInManager) {
-            _signInManager = signInManager;
+            this._signInManager = signInManager;
         }
 
         public string MessageTitle { get; set; }
@@ -28,11 +25,11 @@ namespace Altairis.ShirtShop.Web.Pages.Account {
             }
 
             // Get external login info
-            var info = await _signInManager.GetExternalLoginInfoAsync();
+            var info = await this._signInManager.GetExternalLoginInfoAsync();
             if (info == null) return this.RedirectToPage("Login");
 
             // Sign in the user with this external login provider if the user already has a login.
-            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey,
+            var result = await this._signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey,
                 isPersistent: false,
                 bypassTwoFactor: true);
 

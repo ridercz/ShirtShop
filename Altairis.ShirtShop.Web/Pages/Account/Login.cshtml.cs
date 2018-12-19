@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,13 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Altairis.ShirtShop.Web.Pages.Account {
-public class LoginModel : PageModel {
+    public class LoginModel : PageModel {
     private readonly SignInManager<ShopUser> _signInManager;
 
     public LoginModel(SignInManager<ShopUser> signInManager) {
-        _signInManager = signInManager;
+            this._signInManager = signInManager;
 
-        this.IdentityProviders = _signInManager.GetExternalAuthenticationSchemesAsync().Result.ToList();
+        this.IdentityProviders = this._signInManager.GetExternalAuthenticationSchemesAsync().Result.ToList();
     }
 
     [BindProperty]
@@ -36,7 +35,7 @@ public class LoginModel : PageModel {
 
     public async Task<IActionResult> OnPostAsync(string returnUrl = "/") {
         if (this.ModelState.IsValid) {
-            var result = await _signInManager.PasswordSignInAsync(
+            var result = await this._signInManager.PasswordSignInAsync(
                 this.Input.UserName,
                 this.Input.Password,
                 this.Input.RememberMe,
@@ -46,7 +45,7 @@ public class LoginModel : PageModel {
                 return this.LocalRedirect(returnUrl);
             }
             else if (result.RequiresTwoFactor) {
-                return RedirectToPage("LoginOtp", new {
+                return this.RedirectToPage("LoginOtp", new {
                     ReturnUrl = returnUrl,
                     RememberMe = this.Input.RememberMe
                 });
@@ -55,7 +54,7 @@ public class LoginModel : PageModel {
                 this.ModelState.AddModelError(string.Empty, "Přihlášení se nezdařilo");
             }
         }
-        return Page();
+        return this.Page();
     }
 }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Altairis.ShirtShop.Data;
 using Microsoft.AspNetCore.Authentication;
@@ -18,7 +16,7 @@ namespace Altairis.ShirtShop.Web.Services {
 
         public override async Task<bool> CanSignInAsync(ShopUser user) {
             if (!user.Enabled) {
-                Logger.LogWarning(0, "User {userId} cannot sign in because is not enabled.",
+                this.Logger.LogWarning(0, "User {userId} cannot sign in because is not enabled.",
                     await this.UserManager.GetUserIdAsync(user));
                 return false;
             }

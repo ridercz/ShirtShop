@@ -1,14 +1,11 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity;
 using Altairis.ShirtShop.Data;
 
 namespace Altairis.ShirtShop.Web.Pages.Account.Manage {
-public class ChangeEmailConfirmModel : PageModel {
+    public class ChangeEmailConfirmModel : PageModel {
     private readonly UserManager<ShopUser> _userManager;
 
     public ChangeEmailConfirmModel(UserManager<ShopUser> userManager) {

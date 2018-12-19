@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Altairis.ShirtShop.Web {
-public class ShopConfig {
+﻿namespace Altairis.ShirtShop.Web {
+    public class ShopConfig {
 
     public PaymentConfig Payment { get; set; }
 

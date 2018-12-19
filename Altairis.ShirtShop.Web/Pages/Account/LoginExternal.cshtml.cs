@@ -8,13 +8,13 @@ namespace Altairis.ShirtShop.Web.Pages.Account {
         private readonly SignInManager<ShopUser> _signInManager;
 
         public LoginExternalModel(SignInManager<ShopUser> signInManager) {
-            _signInManager = signInManager;
+            this._signInManager = signInManager;
         }
 
         public IActionResult OnGet(string idpName, string returnUrl = "/") {
             // Redirect to the external login provider
-            var redirectUrl = Url.Page("LoginExternalCallback", values: new { returnUrl });
-            var properties = _signInManager.ConfigureExternalAuthenticationProperties(idpName, redirectUrl);
+            var redirectUrl = this.Url.Page("LoginExternalCallback", values: new { returnUrl });
+            var properties = this._signInManager.ConfigureExternalAuthenticationProperties(idpName, redirectUrl);
             var result = new ChallengeResult(idpName, properties) as IActionResult;
             return result ?? this.Page();
         }
