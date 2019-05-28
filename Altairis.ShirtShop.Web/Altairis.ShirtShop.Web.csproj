@@ -7,7 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Altairis.Services.LoginApprovals" Version="1.0.0-rc1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Altairis.Services.Mailing.Rfc2822" Version="1.0.3" />
+    <PackageReference Include="Altairis.Services.Mailing.Rfc2822" Version="1.0.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
   <ItemGroup>
